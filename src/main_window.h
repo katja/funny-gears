@@ -2,6 +2,8 @@
 #define MAINWINDOW
 
 #include "stable.h"
+#include "option_widget.h" //TODO: move to stable as soon as stable
+#include "option_list_widget.h"
 
 class MainWindow : public QMainWindow {
 
@@ -40,6 +42,11 @@ private:
             *callAction,
             *toggleFileToolBarAction,
             *toggleEditToolBarAction;
+    OptionWidget
+            *objectSchedule,
+            *objectProperties;
+    OptionListWidget
+            *objectMenu;
 
     QWidget *painting;
     QGraphicsScene *scene;

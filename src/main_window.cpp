@@ -1,11 +1,13 @@
 #include "main_window.h"
+#include "palette.h"
 
 MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent) {
-    std::cout << "MainWindow::MainWindow" << std::endl;
     setGeometry(50, 20, 1000, 800);
     setWindowTitle("Funny Gears");
     setWindowIcon(QIcon("Gear.icns"));
     setUnifiedTitleAndToolBarOnMac(true);
+
+    setPalette(Palette());
 
     createActions();
     createScene();
@@ -76,8 +78,6 @@ void MainWindow::sayHello() {
 };
 
 void MainWindow::createActions() {
-    std::cout << "MainWindow::createActions" << std::endl;
-
     connect(createAction(exitAction,  tr("E&xit"),  tr("quit program"), QKeySequence::Quit),
         SIGNAL(triggered()), this, SLOT(quitProgram()));
     connect(createAction(callAction,  tr("&say hello"),  tr("say hello")),
@@ -110,8 +110,6 @@ QAction* MainWindow::createAction(QAction *&action, QString name, QString status
 };
 
 void MainWindow::createMenus() {
-    std::cout << "MainWindow::createMenus" << std::endl;
-
     programMenu = menuBar()->addMenu(tr("Funny Gears"));
     programMenu->addAction(aboutAction);
     programMenu->addSeparator();
@@ -162,8 +160,31 @@ void MainWindow::createToolbars() {
 };
 
 void MainWindow::createLayout() {
+
+    QPushButton *but = new QPushButton(tr("Mainwidget"));
+
+    objectSchedule = new OptionWidget(tr("Object Schedule"), but, this);
+    but = new QPushButton(tr("Blub"));
+    objectProperties = new OptionWidget(tr("Object Properties"), but, this);
+    but = new QPushButton(tr("Blub"));
+    OptionWidget *testWidget = new OptionWidget(tr("Test Options"), but, this);
+    but = new QPushButton(tr("Blub"));
+    OptionWidget *testWidget2= new OptionWidget(tr("Test 2 Options"), but, this);
+    but = new QPushButton(tr("Blub"));
+    OptionWidget *testWidget3= new OptionWidget(tr("Test 2 Options"), but, this);
+
+    objectMenu = new OptionListWidget(this);
+    objectMenu->add(objectSchedule);
+    objectMenu->add(objectProperties);
+    objectMenu->add(testWidget);
+    objectMenu->add(testWidget2);
+    objectMenu->add(testWidget3);
+    
+
     layout = new QHBoxLayout;
     layout->addWidget(view);
+    layout->addWidget(objectMenu);
+
     painting = new QWidget;
     painting->setLayout(layout);
     painting->update();

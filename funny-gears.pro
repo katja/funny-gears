@@ -19,7 +19,9 @@ ICON    = images/Gear.icns      # Mac solution for the icon of the app
 PRECOMPILED_HEADER = src/stable.h
 
 HEADERS = \
-    src/*.h
+    src/*.h \
+    src/gui-elements/*.h
 
 SOURCES = \
-    src/*.cpp
+    src/*.cpp \
+    src/gui-elements/*.cpp
